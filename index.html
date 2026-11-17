@@ -6,31 +6,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#101013">
   <title>HacsowMC | Minecraft Sunucusu</title>
-  <meta name="description" content="HacsowMC Minecraft sunucusuna katıl, arkadaşlarınla maceraya başla!">
+  <meta name="description" content="HacsowMC Minecraft Survival sunucusuna katıl. Maceraya sen de ortak ol!">
 
   <style>
     :root {
       --bg: #101013;
       --surface: #19191e;
-      --surface-2: #202027;
+      --surface2: #222229;
       --text: #f5f5f7;
       --muted: #a5a5ae;
       --border: #303038;
-      --accent: #c93643;
-      --accent-hover: #e04451;
-      --shadow: 0 15px 45px rgba(0,0,0,.22);
+      --accent: #bd303e;
+      --accent2: #8f202d;
+      --shadow: 0 18px 50px rgba(0,0,0,.25);
     }
 
     body.light {
       --bg: #f4f4f6;
-      --surface: #ffffff;
-      --surface-2: #eeeeF2;
+      --surface: #fff;
+      --surface2: #eeeeF2;
       --text: #17171b;
       --muted: #666671;
       --border: #dedee4;
       --accent: #bd2938;
-      --accent-hover: #a91f2d;
-      --shadow: 0 15px 45px rgba(0,0,0,.07);
+      --accent2: #941e2b;
+      --shadow: 0 18px 50px rgba(0,0,0,.08);
     }
 
     * {
@@ -76,7 +76,7 @@
       background: color-mix(in srgb, var(--bg) 92%, transparent);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
-      animation: headerEnter .7s ease both;
+      animation: headerEnter .8s ease both;
     }
 
     .navbar {
@@ -92,7 +92,6 @@
       font-size: 23px;
       font-weight: 900;
       letter-spacing: -.8px;
-      white-space: nowrap;
       cursor: default;
       user-select: none;
     }
@@ -135,8 +134,6 @@
       width: 100%;
     }
 
-    /* TEMA BUTONU */
-
     .theme-area {
       justify-self: end;
     }
@@ -151,7 +148,7 @@
       font-size: 13px;
       font-weight: 700;
       white-space: nowrap;
-      transition: transform .25s ease, border-color .25s ease, background .25s ease;
+      transition: .25s ease;
     }
 
     .theme-button:hover {
@@ -159,14 +156,10 @@
       transform: translateY(-3px);
     }
 
-    .theme-button:active {
-      transform: scale(.96);
-    }
-
     /* ANA SAYFA */
 
     .hero {
-      min-height: 650px;
+      min-height: 690px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -182,11 +175,10 @@
       position: absolute;
       inset: 0;
       z-index: -2;
-      background: url("logo.png") center center / 1000px auto no-repeat;
-      opacity: .22;
+      background: url("logo.png") center center / 1300px auto no-repeat;
+      opacity: .23;
       pointer-events: none;
-      animation: backgroundLogo 12s ease-in-out infinite;
-      will-change: transform;
+      animation: logoMovement 16s ease-in-out infinite;
     }
 
     .hero::after {
@@ -194,26 +186,39 @@
       position: absolute;
       inset: 0;
       z-index: -1;
-      background: radial-gradient(
-        ellipse at center,
-        transparent 0%,
-        var(--bg) 78%
-      );
+      background:
+        radial-gradient(ellipse at 50% 45%, transparent 0%, var(--bg) 78%),
+        linear-gradient(180deg, transparent 65%, var(--bg) 100%);
       pointer-events: none;
     }
 
     .hero-content {
       width: 100%;
       padding: 90px 20px;
+      animation: heroEntrance 1.1s cubic-bezier(.16,1,.3,1) both;
+    }
+
+    .hero-label {
+      display: inline-block;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      padding: 7px 16px;
+      border-radius: 30px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      margin-bottom: 25px;
+      animation: fadeUp .8s .1s both;
     }
 
     .hero h1 {
-      font-size: clamp(52px, 9vw, 92px);
+      font-size: clamp(55px, 10vw, 100px);
       font-weight: 900;
-      letter-spacing: -4px;
-      line-height: 1.08;
+      letter-spacing: -5px;
+      line-height: 1.05;
       margin-bottom: 22px;
-      animation: titleEnter 1s cubic-bezier(.16,1,.3,1) both;
+      animation: titleEntrance 1s .15s cubic-bezier(.16,1,.3,1) both;
     }
 
     .hero h1 span {
@@ -222,34 +227,34 @@
 
     .hero p {
       color: var(--muted);
-      max-width: 540px;
-      margin: 0 auto 32px;
+      max-width: 550px;
+      margin: 0 auto 35px;
       font-size: 17px;
-      animation: textEnter .9s .2s ease both;
+      animation: fadeUp .9s .35s both;
     }
 
     .hero-actions {
-      animation: textEnter .9s .4s ease both;
+      animation: fadeUp .9s .5s both;
     }
 
     .button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 13px 24px;
+      padding: 14px 26px;
       border-radius: 8px;
       background: var(--accent);
       color: white;
       font-weight: 800;
       border: 1px solid var(--accent);
       cursor: pointer;
-      transition: transform .3s ease, background .3s ease, box-shadow .3s ease;
+      transition: transform .3s, background .3s, box-shadow .3s;
     }
 
     .button:hover {
-      background: var(--accent-hover);
+      background: var(--accent2);
       transform: translateY(-5px);
-      box-shadow: 0 10px 28px rgba(201,54,67,.25);
+      box-shadow: 0 12px 28px rgba(150,35,48,.22);
     }
 
     .button:active {
@@ -267,17 +272,18 @@
       background: var(--surface);
       border-color: var(--accent);
       color: var(--text);
+      box-shadow: none;
     }
 
     /* GENEL BÖLÜMLER */
 
     section {
-      padding: 95px 0;
+      padding: 100px 0;
     }
 
     .section-heading {
       text-align: center;
-      margin-bottom: 45px;
+      margin-bottom: 48px;
     }
 
     .section-heading small {
@@ -286,11 +292,11 @@
       font-weight: 800;
       letter-spacing: 2px;
       text-transform: uppercase;
-      margin-bottom: 9px;
+      margin-bottom: 10px;
     }
 
     .section-heading h2 {
-      font-size: clamp(30px, 5vw, 43px);
+      font-size: clamp(30px, 5vw, 44px);
       letter-spacing: -1.5px;
     }
 
@@ -304,19 +310,18 @@
     .about-box {
       max-width: 800px;
       margin: auto;
-      padding: 38px;
+      padding: 42px 38px;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 14px;
       text-align: center;
       box-shadow: var(--shadow);
-      transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+      transition: transform .4s ease, border-color .4s ease;
     }
 
     .about-box:hover {
-      transform: translateY(-6px);
+      transform: translateY(-7px);
       border-color: var(--accent);
-      box-shadow: 0 20px 45px rgba(0,0,0,.16);
     }
 
     .about-box p {
@@ -329,47 +334,66 @@
     .rank-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
+      gap: 23px;
     }
 
     .rank-card {
       display: block;
+      position: relative;
+      overflow: hidden;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 13px;
-      padding: 30px 25px;
+      border-radius: 14px;
+      padding: 34px 25px;
       text-align: center;
       box-shadow: var(--shadow);
       transition:
         transform .4s cubic-bezier(.2,.8,.2,1),
-        border-color .3s ease,
+        border-color .35s ease,
         box-shadow .4s ease;
     }
 
+    .rank-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .4s ease;
+    }
+
+    .rank-card:hover::before {
+      transform: scaleX(1);
+    }
+
     .rank-card:hover {
-      transform: translateY(-10px);
+      transform: translateY(-11px);
       border-color: var(--accent);
-      box-shadow: 0 22px 45px rgba(201,54,67,.13);
+      box-shadow: 0 24px 50px rgba(0,0,0,.18);
     }
 
     .rank-icon {
-      width: 68px;
-      height: 68px;
+      width: 70px;
+      height: 70px;
       display: grid;
       place-items: center;
-      margin: 0 auto 18px;
+      margin: 0 auto 20px;
       border-radius: 15px;
-      background: var(--surface-2);
+      background: var(--surface2);
       color: var(--accent);
       font-size: 24px;
       font-weight: 900;
       letter-spacing: -1px;
-      transition: transform .4s ease, background .3s ease;
+      transition: transform .4s ease, background .4s ease;
     }
 
     .rank-card:hover .rank-icon {
-      transform: rotate(-8deg) scale(1.12);
-      background: color-mix(in srgb, var(--accent) 13%, var(--surface-2));
+      transform: translateY(-5px) rotate(-7deg) scale(1.1);
+      background: color-mix(in srgb, var(--accent) 13%, var(--surface2));
     }
 
     .rank-card h3 {
@@ -384,8 +408,8 @@
     }
 
     .rank-price {
-      margin: 22px 0;
-      font-size: 25px;
+      margin: 23px 0;
+      font-size: 26px;
       font-weight: 900;
       color: var(--accent);
     }
@@ -398,12 +422,12 @@
 
     .rank-link {
       display: block;
-      padding: 11px;
+      padding: 12px;
       border-radius: 7px;
       border: 1px solid var(--border);
       font-size: 14px;
       font-weight: 800;
-      transition: background .3s ease, color .3s ease, border-color .3s ease;
+      transition: .3s ease;
     }
 
     .rank-card:hover .rank-link {
@@ -417,25 +441,25 @@
     .join-box {
       max-width: 750px;
       margin: auto;
-      padding: 42px 25px;
+      padding: 45px 25px;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 14px;
       text-align: center;
       box-shadow: var(--shadow);
-      transition: transform .35s ease, border-color .35s ease;
+      transition: transform .4s ease, border-color .4s ease;
     }
 
     .join-box:hover {
-      transform: translateY(-5px);
+      transform: translateY(-6px);
       border-color: var(--accent);
     }
 
     .server-ip {
       display: inline-block;
-      margin: 23px 0;
-      padding: 13px 23px;
-      background: var(--surface-2);
+      margin: 24px 0;
+      padding: 14px 25px;
+      background: var(--surface2);
       border: 1px solid var(--border);
       border-radius: 8px;
       font-size: clamp(17px, 4vw, 23px);
@@ -465,14 +489,14 @@
       transform: translate(-50%, -150%);
       opacity: 0;
       z-index: 300;
-      padding: 12px 22px;
+      padding: 13px 23px;
       border-radius: 8px;
       background: var(--accent);
       color: white;
       font-size: 14px;
       font-weight: 800;
       box-shadow: var(--shadow);
-      transition: transform .4s cubic-bezier(.2,.8,.2,1), opacity .4s ease;
+      transition: transform .45s cubic-bezier(.16,1,.3,1), opacity .4s;
       pointer-events: none;
     }
 
@@ -485,7 +509,7 @@
 
     footer {
       border-top: 1px solid var(--border);
-      padding: 30px 0;
+      padding: 32px 0;
       text-align: center;
     }
 
@@ -499,12 +523,11 @@
     .reveal {
       opacity: 0;
       transform: translateY(45px);
-      filter: blur(4px);
+      filter: blur(5px);
       transition:
-        opacity .85s ease,
-        transform .85s cubic-bezier(.16,1,.3,1),
-        filter .85s ease;
-      will-change: opacity, transform;
+        opacity .9s ease,
+        transform .9s cubic-bezier(.16,1,.3,1),
+        filter .9s ease;
     }
 
     .reveal.visible {
@@ -514,11 +537,11 @@
     }
 
     .rank-card:nth-child(2) {
-      transition-delay: .12s;
+      transition-delay: .13s;
     }
 
     .rank-card:nth-child(3) {
-      transition-delay: .24s;
+      transition-delay: .26s;
     }
 
     /* ANİMASYONLAR */
@@ -526,7 +549,7 @@
     @keyframes headerEnter {
       from {
         opacity: 0;
-        transform: translateY(-18px);
+        transform: translateY(-20px);
       }
       to {
         opacity: 1;
@@ -534,11 +557,22 @@
       }
     }
 
-    @keyframes titleEnter {
+    @keyframes heroEntrance {
       from {
         opacity: 0;
-        transform: translateY(35px) scale(.96);
-        filter: blur(8px);
+        transform: translateY(25px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes titleEntrance {
+      from {
+        opacity: 0;
+        transform: translateY(35px) scale(.94);
+        filter: blur(9px);
       }
       to {
         opacity: 1;
@@ -547,10 +581,10 @@
       }
     }
 
-    @keyframes textEnter {
+    @keyframes fadeUp {
       from {
         opacity: 0;
-        transform: translateY(22px);
+        transform: translateY(24px);
       }
       to {
         opacity: 1;
@@ -558,12 +592,12 @@
       }
     }
 
-    @keyframes backgroundLogo {
+    @keyframes logoMovement {
       0%, 100% {
-        transform: scale(1) rotate(0deg);
+        transform: scale(1) translateY(0);
       }
       50% {
-        transform: scale(1.035) rotate(1deg);
+        transform: scale(1.045) translateY(-9px);
       }
     }
 
@@ -616,7 +650,7 @@
       }
 
       .hero {
-        min-height: 540px;
+        min-height: 560px;
       }
 
       .hero::before {
@@ -634,11 +668,11 @@
       }
 
       section {
-        padding: 70px 0;
+        padding: 75px 0;
       }
 
       .about-box {
-        padding: 27px 20px;
+        padding: 28px 20px;
       }
 
       .button-outline {
@@ -698,6 +732,8 @@
 
     <section class="hero" id="anasayfa">
       <div class="hero-content">
+
+        <div class="hero-label">MINECRAFT SURVIVAL SUNUCUSU</div>
 
         <h1>Hacsow<span>MC</span></h1>
 
@@ -825,7 +861,7 @@
       });
     }
 
-    // BİLDİRİM ANİMASYONU
+    // BİLDİRİM
 
     let toastTimer;
 
@@ -865,7 +901,7 @@
     const savedTheme = localStorage.getItem("hacsow-theme") || "dark";
     applyTheme(savedTheme);
 
-    // MENÜDE YUMUŞAK KAYDIRMA
+    // MENÜ YUMUŞAK KAYDIRMA
 
     document.querySelectorAll('a[href^="#"]').forEach(link => {
       link.addEventListener("click", function(event) {
@@ -882,7 +918,7 @@
       });
     });
 
-    // SCROLL İLE ANİMASYONLU GÖRÜNME
+    // SCROLL ANİMASYONLARI
 
     const revealObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
