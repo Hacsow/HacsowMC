@@ -1,0 +1,423 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101013">
+<title>MVIP Rütbesi | HacsowMC</title>
+<meta name="description" content="HacsowMC MVIP rütbesini keşfet. Güçlü ekipmanlar ve özel ayrıcalıklar seni bekliyor.">
+
+<style>
+:root {
+    --bg:#101013;
+    --surface:#18181d;
+    --surface2:#202027;
+    --text:#f4f4f6;
+    --muted:#a3a3ad;
+    --accent:#a65cce;
+    --accent2:#c17ce8;
+    --border:rgba(255,255,255,.09);
+}
+body.light {
+    --bg:#f3f3f5;
+    --surface:#fff;
+    --surface2:#eeeeF1;
+    --text:#19191d;
+    --muted:#686873;
+    --border:rgba(0,0,0,.09);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    transition:background .3s,color .3s;
+    overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+header{
+    height:76px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 8%;
+    border-bottom:1px solid var(--border);
+    background:var(--bg);
+    position:sticky;
+    top:0;
+    z-index:100;
+    animation:slideDown .7s ease both;
+}
+.logo{font-size:23px;font-weight:900;letter-spacing:-1px}
+.logo span{color:var(--accent2)}
+nav{display:flex;gap:32px;align-items:center}
+nav a{color:var(--muted);font-size:14px;transition:color .2s}
+nav a:hover{color:var(--accent2)}
+.theme{
+    width:39px;height:39px;
+    border:1px solid var(--border);
+    background:var(--surface);
+    color:var(--text);
+    border-radius:12px;
+    cursor:pointer;
+    font-size:17px;
+}
+.hero{
+    min-height:620px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:90px 20px;
+    position:relative;
+    overflow:hidden;
+}
+.hero::before{
+    content:"";
+    position:absolute;
+    width:650px;height:650px;
+    background:radial-gradient(circle,rgba(166,92,206,.18),transparent 68%);
+    pointer-events:none;
+}
+.hero-content{
+    position:relative;
+    max-width:850px;
+    animation:heroEnter 1s ease both;
+}
+.rank-icon{
+    width:112px;height:112px;
+    margin:0 auto 28px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:30px;
+    background:linear-gradient(145deg,#34313b,#1c1a22);
+    border:1px solid rgba(193,124,232,.45);
+    box-shadow:0 15px 55px rgba(166,92,206,.18);
+    font-size:43px;
+    font-weight:900;
+    color:var(--accent2);
+    transform:rotate(-4deg);
+}
+.hero h1{
+    font-size:clamp(55px,9vw,100px);
+    font-weight:900;
+    letter-spacing:-5px;
+    line-height:1;
+}
+.hero h1 span{color:var(--accent2)}
+.hero p{
+    color:var(--muted);
+    font-size:17px;
+    line-height:1.8;
+    max-width:570px;
+    margin:25px auto 30px;
+}
+.price{font-size:37px;font-weight:900;margin-bottom:8px}
+.price small{color:var(--muted);font-size:15px;font-weight:400}
+.hero-buttons{
+    display:flex;
+    justify-content:center;
+    gap:13px;
+    flex-wrap:wrap;
+    margin-top:30px;
+}
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:15px 25px;
+    border-radius:12px;
+    font-weight:700;
+    font-size:14px;
+    transition:.25s;
+    cursor:pointer;
+    border:1px solid var(--border);
+}
+.btn-primary{background:var(--accent);color:white;border-color:var(--accent)}
+.btn-primary:hover{
+    background:var(--accent2);
+    transform:translateY(-3px);
+    box-shadow:0 10px 30px rgba(166,92,206,.25);
+}
+.btn-secondary{background:var(--surface);color:var(--text)}
+.btn-secondary:hover{border-color:var(--accent);transform:translateY(-3px)}
+section{padding:85px 8%}
+.section-heading{text-align:center;margin-bottom:45px}
+.section-heading h2{font-size:35px;letter-spacing:-1px;margin-bottom:12px}
+.section-heading p{color:var(--muted);line-height:1.7}
+.features{background:var(--surface)}
+.feature-grid{
+    max-width:1100px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+.feature{
+    padding:27px;
+    background:var(--bg);
+    border:1px solid var(--border);
+    border-radius:17px;
+    transition:.25s;
+}
+.feature:hover{transform:translateY(-5px);border-color:rgba(166,92,206,.5)}
+.feature-icon{font-size:27px;margin-bottom:17px}
+.feature h3{font-size:17px;margin-bottom:10px}
+.feature p{color:var(--muted);font-size:14px;line-height:1.7}
+.kit-area{
+    max-width:900px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+}
+.kit-card{
+    padding:30px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:18px;
+}
+.kit-card h3{font-size:21px;margin-bottom:20px}
+.kit-card ul{list-style:none}
+.kit-card li{
+    padding:12px 0;
+    color:var(--muted);
+    border-bottom:1px solid var(--border);
+    font-size:14px;
+}
+.kit-card li:last-child{border:0}
+.kit-card li::before{
+    content:"✓";
+    color:var(--accent2);
+    font-weight:bold;
+    margin-right:10px;
+}
+.purchase{background:var(--surface);text-align:center}
+.purchase-box{
+    max-width:650px;
+    margin:auto;
+    padding:45px 25px;
+    background:var(--bg);
+    border:1px solid var(--border);
+    border-radius:22px;
+}
+.purchase-box h2{font-size:32px;margin-bottom:15px}
+.purchase-box p{color:var(--muted);line-height:1.8;margin-bottom:25px}
+.purchase-price{font-size:43px;font-weight:900;margin:20px 0}
+.purchase-price span{font-size:15px;color:var(--muted);font-weight:400}
+.note{color:var(--muted);font-size:12px;margin-top:17px}
+footer{
+    padding:30px 8%;
+    text-align:center;
+    color:var(--muted);
+    border-top:1px solid var(--border);
+    font-size:13px;
+}
+@keyframes slideDown{
+    from{opacity:0;transform:translateY(-25px)}
+    to{opacity:1;transform:translateY(0)}
+}
+@keyframes heroEnter{
+    from{opacity:0;transform:translateY(35px)}
+    to{opacity:1;transform:translateY(0)}
+}
+@media(max-width:800px){
+    header{padding:0 5%}
+    nav{gap:14px}
+    nav a{font-size:12px}
+    section{padding:70px 5%}
+    .feature-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:560px){
+    header{height:auto;min-height:70px;flex-wrap:wrap;gap:12px;padding:15px 5%}
+    nav{order:3;width:100%;justify-content:center;flex-wrap:wrap}
+    .hero{min-height:560px}
+    .hero h1{letter-spacing:-3px}
+    .feature-grid,.kit-area{grid-template-columns:1fr}
+    .section-heading h2{font-size:28px}
+}
+@media(prefers-reduced-motion:reduce){
+    *,*::before,*::after{
+        animation-duration:.01ms!important;
+        transition-duration:.01ms!important;
+        scroll-behavior:auto!important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <a href="index.html" class="logo">Hacsow<span>MC</span></a>
+
+    <nav>
+        <a href="index.html">Ana Sayfa</a>
+        <a href="index.html#hakkimizda">Hakkımızda</a>
+        <a href="index.html#rutbeler">Mağaza</a>
+        <a href="index.html#katil">Sunucuya Katıl</a>
+    </nav>
+
+    <button class="theme" onclick="toggleTheme()" aria-label="Temayı değiştir">☀</button>
+</header>
+
+<main>
+
+    <div class="hero">
+        <div class="hero-content">
+
+            <div class="rank-icon">MV</div>
+
+            <h1>MVIP<span>.</span></h1>
+
+            <p>
+                HacsowMC dünyasında daha güçlü bir maceraya hazır ol.
+                MVIP rütbesinin özel avantajlarıyla farkını ortaya koy!
+            </p>
+
+            <div class="price">79,90 TL <small>/ ay</small></div>
+
+            <div class="hero-buttons">
+                <a href="#satinal" class="btn btn-primary">MVIP'yi Keşfet</a>
+                <a href="index.html#rutbeler" class="btn btn-secondary">Diğer Rütbeler</a>
+            </div>
+
+        </div>
+    </div>
+
+    <section class="features">
+
+        <div class="section-heading">
+            <h2>MVIP Ayrıcalıkları</h2>
+            <p>HacsowMC'de MVIP oyuncularını bekleyen özel avantajlar.</p>
+        </div>
+
+        <div class="feature-grid">
+
+            <div class="feature">
+                <div class="feature-icon">💰</div>
+                <h3>Aylık 200.000 Oyun Parası</h3>
+                <p>Her yenileme döneminde hesabına 200.000 oyun parası eklenir.</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">⚔️</div>
+                <h3>Büyülü Elmas Set</h3>
+                <p>Özel büyülere sahip elmas zırh setiyle savaşlarda avantaj kazan.</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">⛏️</div>
+                <h3>Elmas Aletler</h3>
+                <p>Elmas kazma ve elmas balta ile işlerini daha hızlı hallet.</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">🍖</div>
+                <h3>128 Adet Biftek</h3>
+                <p>Macera boyunca kullanabileceğin 2 stack biftek.</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">🍎</div>
+                <h3>16 Altın Elma</h3>
+                <p>Zorlu savaşlarda kullanabileceğin 16 adet altın elma.</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">📦</div>
+                <h3>Özel Shulker</h3>
+                <p>Eşyalarını saklamak için 1 adet shulker.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section>
+
+        <div class="section-heading">
+            <h2>MVIP Kit İçeriği</h2>
+            <p>MVIP rütbesine sahip oyunculara özel ekipmanlar.</p>
+        </div>
+
+        <div class="kit-area">
+
+            <div class="kit-card">
+                <h3>⚔️ Ekipmanlar</h3>
+                <ul>
+                    <li>Büyülü elmas zırh seti</li>
+                    <li>Elmas kazma</li>
+                    <li>Elmas balta</li>
+                </ul>
+            </div>
+
+            <div class="kit-card">
+                <h3>🎒 Ekstralar</h3>
+                <ul>
+                    <li>128 adet biftek (2 stack)</li>
+                    <li>16 adet altın elma</li>
+                    <li>1 adet shulker</li>
+                    <li>Aylık 200.000 oyun parası</li>
+                </ul>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="purchase" id="satinal">
+
+        <div class="purchase-box">
+            <h2>MVIP Olmaya Hazır mısın?</h2>
+
+            <p>
+                HacsowMC'de MVIP ayrıcalıklarını keşfet.
+                Satın alma sistemi çok yakında burada olacak.
+            </p>
+
+            <div class="purchase-price">
+                79,90 TL <span>/ ay</span>
+            </div>
+
+            <a href="index.html#rutbeler" class="btn btn-primary">
+                Mağazaya Geri Dön
+            </a>
+
+            <div class="note">
+                Satın alma sistemi yakında aktif olacaktır.
+            </div>
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    © 2026 HacsowMC. Tüm hakları saklıdır.
+</footer>
+
+<script>
+function toggleTheme(){
+    document.body.classList.toggle("light");
+
+    const light=document.body.classList.contains("light");
+
+    localStorage.setItem("hacsow-theme",light?"light":"dark");
+
+    document.querySelector(".theme").textContent=light?"☾":"☀";
+}
+
+const savedTheme=localStorage.getItem("hacsow-theme");
+
+if(savedTheme==="light"){
+    document.body.classList.add("light");
+    document.querySelector(".theme").textContent="☾";
+}
+</script>
+
+</body>
+</html>
