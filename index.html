@@ -4,28 +4,48 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HacsowMC | Resmî Sunucu</title>
+<title>HacsowMC | Resmî Minecraft Sunucusu</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#090909;color:white;font-family:Arial,sans-serif}
-header{padding:22px 8%;display:flex;justify-content:space-between;align-items:center;background:#111;border-bottom:2px solid #d71920}
-.logo{font-size:27px;font-weight:bold;color:#ed252c}
-nav a{color:white;text-decoration:none;margin-left:20px;font-size:14px}
-.hero{text-align:center;padding:110px 20px;background:linear-gradient(#0009,#000e),url('https://images.unsplash.com/photo-1607513746994-51f730a44832?auto=format&fit=crop&w=1600&q=80') center/cover}
-.hero h1{font-size:60px;color:#ed252c;margin-bottom:15px}
-.hero p{font-size:19px;color:#ddd;margin-bottom:28px}
-.btn{display:inline-block;background:#d71920;color:white;padding:14px 25px;border-radius:7px;text-decoration:none;font-weight:bold}
-section{padding:65px 8%;text-align:center}
-h2{font-size:32px;margin-bottom:25px;color:#ed252c}
-.cards{display:flex;justify-content:center;flex-wrap:wrap;gap:20px}
-.card{background:#171717;border:1px solid #333;padding:28px;border-radius:12px;width:260px}
-.card h3{margin-bottom:12px;color:#ed252c}
-.card p{color:#ccc;line-height:1.7}
-footer{background:#111;text-align:center;padding:25px;color:#888;border-top:1px solid #333}
-@media(max-width:650px){header{flex-direction:column;gap:18px}nav a{margin:0 7px}.hero h1{font-size:42px}}
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+body{background:#080808;color:white;font-family:Arial,sans-serif;overflow-x:hidden}
+header{height:80px;padding:0 8%;display:flex;align-items:center;justify-content:space-between;background:#101010;border-bottom:1px solid #8d1118;position:sticky;top:0;z-index:10}
+.logo{font-size:27px;font-weight:900;color:#ed252c;text-shadow:0 0 18px #ed252c}
+nav{display:flex;gap:25px}
+nav a{color:#ddd;text-decoration:none;transition:.3s;font-size:14px}
+nav a:hover{color:#ed252c}
+.hero{min-height:570px;display:flex;align-items:center;justify-content:center;text-align:center;padding:60px 20px;background:linear-gradient(90deg,#080808e8,#08080880),url('https://images.unsplash.com/photo-1607513746994-51f730a44832?auto=format&fit=crop&w=1600&q=80') center/cover}
+.hero-content{animation:appear 1.2s ease}
+.hero h1{font-size:76px;color:#ed252c;text-shadow:0 0 35px #c8141c;margin-bottom:15px}
+.hero p{font-size:20px;color:#ddd;margin-bottom:35px}
+.btn{display:inline-block;padding:15px 27px;background:#d71920;color:white;text-decoration:none;border:0;border-radius:6px;font-weight:bold;cursor:pointer;transition:.3s}
+.btn:hover{background:#ff3038;transform:translateY(-4px);box-shadow:0 8px 25px #d7192055}
+section{padding:90px 8%;text-align:center}
+.section-title{font-size:38px;color:#ed252c;margin-bottom:18px}
+.section-subtitle{color:#999;margin-bottom:38px}
+.about{background:#101010}
+.about p{font-size:18px;color:#bbb;line-height:1.9;max-width:700px;margin:auto}
+.server-box{max-width:550px;margin:auto;background:#151515;padding:35px;border:1px solid #333;border-radius:14px;transition:.3s}
+.server-box:hover{border-color:#ed252c;box-shadow:0 0 30px #ed252222}
+.ip{font-size:23px;font-weight:bold;letter-spacing:1px;margin:18px 0;color:white;cursor:pointer}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:25px;max-width:1000px;margin:auto}
+.card{display:block;background:linear-gradient(145deg,#191919,#0d0d0d);border:1px solid #333;padding:35px 20px;border-radius:14px;text-decoration:none;color:white;transition:.35s}
+.card:hover{transform:translateY(-12px);border-color:#ed252c;box-shadow:0 15px 40px #ed252c20}
+.card h3{font-size:27px;margin-bottom:15px}
+.card p{color:#aaa;line-height:1.8}
+.price{font-size:28px;color:#ed252c!important;font-weight:bold;margin:15px 0}
+footer{background:#101010;border-top:1px solid #333;text-align:center;padding:30px;color:#777}
+#toast{position:fixed;top:20px;left:50%;transform:translate(-50%,-100px);background:#171717;border:1px solid #ed252c;color:white;padding:15px 24px;border-radius:9px;z-index:100;font-weight:bold;box-shadow:0 5px 25px #000;transition:.4s}
+#toast.show{transform:translate(-50%,0)}
+.reveal{opacity:0;transform:translateY(35px);transition:opacity .8s,transform .8s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@keyframes appear{from{opacity:0;transform:translateY(35px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:750px){header{height:auto;padding:20px;flex-direction:column;gap:18px}nav{gap:13px;flex-wrap:wrap;justify-content:center}.hero h1{font-size:48px}.cards{grid-template-columns:1fr}section{padding:65px 6%}}
 </style>
 </head>
 <body>
+
+<div id="toast">IP adresi kopyalandı!</div>
+
 <header>
 <div class="logo">HacsowMC</div>
 <nav>
@@ -37,36 +57,75 @@ footer{background:#111;text-align:center;padding:25px;color:#888;border-top:1px 
 </header>
 
 <div class="hero" id="anasayfa">
+<div class="hero-content">
 <h1>HacsowMC</h1>
-<p>Macera burada başlıyor!</p>
-<a class="btn" href="#katil">Sunucuya Katıl</a>
+<p>Macera burada başlıyor. Kendi hikâyeni yaz!</p>
+<a href="#katil" class="btn">SUNUCUYA KATIL</a>
+</div>
 </div>
 
-<section id="hakkimizda">
-<h2>Hakkımızda</h2>
-<p>HacsowMC, arkadaşlarınla maceraya atılabileceğin Survival sunucusudur.</p>
+<section class="about reveal" id="hakkimizda">
+<h2 class="section-title">Sunucumuz, Kalitemiz.</h2>
+<p>HacsowMC dünyasına hoş geldin! Arkadaşlarınla birlikte maceraya atıl, hayatta kal, geliş ve kendi hikâyeni oluştur. Seni Survival dünyamızda bekliyoruz!</p>
 </section>
 
-<section id="katil">
-<h2>Sunucuya Katıl</h2>
-<div class="card">
-<h3>Java Edition</h3>
-<p>Sunucu adresimiz:</p>
-<p><strong>hacsowmc.minecraft.how</strong></p>
-<br>
-<button class="btn" onclick="navigator.clipboard.writeText('hacsowmc.minecraft.how')">IP Kopyala</button>
+<section id="katil" class="reveal">
+<h2 class="section-title">Sunucuya Katıl</h2>
+<p class="section-subtitle">HacsowMC macerasına katılmak için sunucu adresimizi kopyala.</p>
+<div class="server-box">
+<div class="ip" onclick="copyIP()">hacsowmc.minecraft.how</div>
+<button class="btn" onclick="copyIP()">IP ADRESİNİ KOPYALA</button>
 </div>
 </section>
 
-<section id="rutbeler">
-<h2>Rütbeler</h2>
+<section id="rutbeler" class="reveal">
+<h2 class="section-title">Rütbelerimiz</h2>
+<p class="section-subtitle">Sana en uygun rütbeyi seç ve maceranı geliştir.</p>
 <div class="cards">
-<div class="card"><h3>VIP</h3><p>49,90 TL</p><p>Aylık 100.000 oyun parası</p></div>
-<div class="card"><h3>MVIP</h3><p>79,90 TL</p><p>Aylık 200.000 oyun parası</p></div>
-<div class="card"><h3>HSVIP</h3><p>89,90 TL</p><p>Aylık 300.000 oyun parası</p></div>
+<a href="vip.html" class="card">
+<h3 style="color:#f1c40f">VIP</h3>
+<p>VIP ayrıcalıklarını keşfet.</p>
+<p class="price">49,90 TL</p>
+<p>AYRINTILARI GÖR →</p>
+</a>
+<a href="mvip.html" class="card">
+<h3 style="color:#b7c9d6">MVIP</h3>
+<p>Bir üst seviyeye geç.</p>
+<p class="price">79,90 TL</p>
+<p>AYRINTILARI GÖR →</p>
+</a>
+<a href="hsvip.html" class="card">
+<h3 style="color:#ed252c">HSVIP</h3>
+<p>En özel ayrıcalıklar seni bekliyor.</p>
+<p class="price">89,90 TL</p>
+<p>AYRINTILARI GÖR →</p>
+</a>
 </div>
 </section>
 
-<footer>© 2026 HacsowMC - Tüm hakları saklıdır.</footer>
+<footer>© 2026 HacsowMC | Tüm hakları saklıdır.</footer>
+
+<script>
+function showToast(message){
+const toast=document.getElementById('toast');
+toast.textContent=message;
+toast.classList.add('show');
+setTimeout(()=>toast.classList.remove('show'),2600);
+}
+async function copyIP(){
+try{
+await navigator.clipboard.writeText('hacsowmc.minecraft.how');
+showToast('✓ IP adresi kopyalandı!');
+}catch(e){
+showToast('IP: hacsowmc.minecraft.how');
+}
+}
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting)entry.target.classList.add('visible');
+});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
 </body>
 </html>
