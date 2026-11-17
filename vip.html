@@ -1,0 +1,642 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101013">
+<title>VIP Rütbesi | HacsowMC</title>
+<meta name="description" content="HacsowMC VIP rütbesini keşfet. Özel avantajlar ve ayrıcalıklar seni bekliyor.">
+
+<style>
+:root {
+    --bg: #101013;
+    --surface: #18181d;
+    --surface2: #202027;
+    --text: #f4f4f6;
+    --muted: #a3a3ad;
+    --accent: #bd3b48;
+    --accent2: #e05260;
+    --border: rgba(255,255,255,.09);
+}
+
+body.light {
+    --bg: #f3f3f5;
+    --surface: #ffffff;
+    --surface2: #eeeeF1;
+    --text: #19191d;
+    --muted: #686873;
+    --border: rgba(0,0,0,.09);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    transition: background .3s, color .3s;
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+header {
+    height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8%;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    animation: slideDown .7s ease both;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: 900;
+    letter-spacing: -1px;
+}
+
+.logo span {
+    color: var(--accent2);
+}
+
+nav {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+}
+
+nav a {
+    color: var(--muted);
+    font-size: 14px;
+    transition: color .2s;
+}
+
+nav a:hover {
+    color: var(--accent2);
+}
+
+.theme {
+    width: 39px;
+    height: 39px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 17px;
+}
+
+.hero {
+    min-height: 620px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 90px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 650px;
+    height: 650px;
+    background: radial-gradient(circle, rgba(189,59,72,.17), transparent 68%);
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    max-width: 850px;
+    animation: heroEnter 1s ease both;
+}
+
+.rank-icon {
+    width: 112px;
+    height: 112px;
+    margin: 0 auto 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    background: linear-gradient(145deg, #34343b, #1c1c22);
+    border: 1px solid rgba(224,82,96,.45);
+    box-shadow: 0 15px 55px rgba(189,59,72,.18);
+    font-size: 55px;
+    font-weight: 900;
+    color: #e05260;
+    transform: rotate(-4deg);
+}
+
+.hero h1 {
+    font-size: clamp(55px, 9vw, 100px);
+    font-weight: 900;
+    letter-spacing: -5px;
+    line-height: 1;
+}
+
+.hero h1 span {
+    color: var(--accent2);
+}
+
+.hero p {
+    color: var(--muted);
+    font-size: 17px;
+    line-height: 1.8;
+    max-width: 570px;
+    margin: 25px auto 30px;
+}
+
+.price {
+    font-size: 37px;
+    font-weight: 900;
+    margin-bottom: 8px;
+}
+
+.price small {
+    color: var(--muted);
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 13px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 25px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 14px;
+    transition: .25s;
+    cursor: pointer;
+    border: 1px solid var(--border);
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+.btn-primary:hover {
+    background: var(--accent2);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(189,59,72,.25);
+}
+
+.btn-secondary {
+    background: var(--surface);
+    color: var(--text);
+}
+
+.btn-secondary:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+}
+
+section {
+    padding: 85px 8%;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.section-heading h2 {
+    font-size: 35px;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+}
+
+.section-heading p {
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+.features {
+    background: var(--surface);
+}
+
+.feature-grid {
+    max-width: 1100px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.feature {
+    padding: 27px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    transition: .25s;
+}
+
+.feature:hover {
+    transform: translateY(-5px);
+    border-color: rgba(189,59,72,.5);
+}
+
+.feature-icon {
+    font-size: 27px;
+    margin-bottom: 17px;
+}
+
+.feature h3 {
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+
+.feature p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.kit-area {
+    max-width: 900px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+}
+
+.kit-card {
+    padding: 30px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+}
+
+.kit-card h3 {
+    font-size: 21px;
+    margin-bottom: 20px;
+}
+
+.kit-card ul {
+    list-style: none;
+}
+
+.kit-card li {
+    padding: 12px 0;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+}
+
+.kit-card li:last-child {
+    border: 0;
+}
+
+.kit-card li::before {
+    content: "✓";
+    color: var(--accent2);
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.purchase {
+    background: var(--surface);
+    text-align: center;
+}
+
+.purchase-box {
+    max-width: 650px;
+    margin: auto;
+    padding: 45px 25px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+}
+
+.purchase-box h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.purchase-box p {
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+.purchase-price {
+    font-size: 43px;
+    font-weight: 900;
+    margin: 20px 0;
+}
+
+.purchase-price span {
+    font-size: 15px;
+    color: var(--muted);
+    font-weight: 400;
+}
+
+.note {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 17px;
+}
+
+footer {
+    padding: 30px 8%;
+    text-align: center;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+}
+
+.toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translate(-50%, -100px);
+    background: #24242b;
+    color: white;
+    border: 1px solid rgba(255,255,255,.12);
+    padding: 14px 22px;
+    border-radius: 12px;
+    z-index: 999;
+    opacity: 0;
+    transition: .4s;
+    box-shadow: 0 10px 35px rgba(0,0,0,.25);
+}
+
+.toast.show {
+    transform: translate(-50%, 0);
+    opacity: 1;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heroEnter {
+    from { opacity: 0; transform: translateY(35px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 800px) {
+    header { padding: 0 5%; }
+    nav { gap: 14px; }
+    nav a { font-size: 12px; }
+    section { padding: 70px 5%; }
+    .feature-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px) {
+    header { height: auto; min-height: 70px; flex-wrap: wrap; gap: 12px; padding: 15px 5%; }
+    nav { order: 3; width: 100%; justify-content: center; flex-wrap: wrap; }
+    .hero { min-height: 560px; }
+    .hero h1 { letter-spacing: -3px; }
+    .feature-grid, .kit-area { grid-template-columns: 1fr; }
+    .section-heading h2 { font-size: 28px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="toast" id="toast">Sunucu adresi kopyalandı!</div>
+
+<header>
+    <a href="index.html" class="logo">Hacsow<span>MC</span></a>
+
+    <nav>
+        <a href="index.html">Ana Sayfa</a>
+        <a href="index.html#hakkimizda">Hakkımızda</a>
+        <a href="index.html#rutbeler">Mağaza</a>
+        <a href="index.html#katil">Sunucuya Katıl</a>
+    </nav>
+
+    <button class="theme" onclick="toggleTheme()" aria-label="Temayı değiştir">☀</button>
+</header>
+
+<main>
+
+    <div class="hero">
+        <div class="hero-content">
+
+            <div class="rank-icon">V</div>
+
+            <h1>VIP<span>.</span></h1>
+
+            <p>
+                HacsowMC dünyasında ayrıcalıklı bir deneyime adım at.
+                VIP rütbesiyle macerana yeni avantajlar kat!
+            </p>
+
+            <div class="price">49,90 TL <small>/ ay</small></div>
+
+            <div class="hero-buttons">
+                <a href="#satinal" class="btn btn-primary">VIP'yi Keşfet</a>
+                <a href="index.html#rutbeler" class="btn btn-secondary">Diğer Rütbeler</a>
+            </div>
+
+        </div>
+    </div>
+
+    <section class="features">
+
+        <div class="section-heading">
+            <h2>VIP Ayrıcalıkları</h2>
+            <p>VIP rütbesiyle HacsowMC'de seni bekleyen avantajlar.</p>
+        </div>
+
+        <div class="feature-grid">
+
+            <div class="feature">
+                <div class="feature-icon">💰</div>
+                <h3>Aylık 100.000 Oyun Parası</h3>
+                <p>Her yenileme döneminde hesabına 100.000 oyun parası eklenir.</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">⚔️</div>
+                <h3>VIP Özel Kiti</h3>
+                <p>VIP rütbesine özel ekipmanlarla macerana daha güçlü başla.</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">⭐</div>
+                <h3>Özel Rütbe</h3>
+                <p>Sunucuda VIP rütbesine özel bir ayrıcalığa sahip ol.</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">🎮</div>
+                <h3>Survival Deneyimi</h3>
+                <p>Hayatta kalma macerana yeni avantajlar ekle.</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">🛡️</div>
+                <h3>Özel Ekipmanlar</h3>
+                <p>VIP kitindeki ekipmanlarla kendini geliştirmeye başla.</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">❤️</div>
+                <h3>HacsowMC Desteği</h3>
+                <p>Satın alımın sunucunun gelişmesine katkıda bulunur.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section>
+
+        <div class="section-heading">
+            <h2>VIP Kit İçeriği</h2>
+            <p>VIP rütbesiyle elde edeceğin başlangıç ekipmanları.</p>
+        </div>
+
+        <div class="kit-area">
+
+            <div class="kit-card">
+                <h3>⚔️ Ekipmanlar</h3>
+                <ul>
+                    <li>Zincir zırh seti</li>
+                    <li>Taş kazma</li>
+                    <li>Taş balta</li>
+                </ul>
+            </div>
+
+            <div class="kit-card">
+                <h3>🎒 Ekstralar</h3>
+                <ul>
+                    <li>32 adet biftek</li>
+                    <li>VIP rütbesi</li>
+                    <li>Aylık 100.000 oyun parası</li>
+                </ul>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="purchase" id="satinal">
+
+        <div class="purchase-box">
+            <h2>VIP Olmaya Hazır mısın?</h2>
+
+            <p>
+                HacsowMC'de VIP ayrıcalıklarını keşfet.
+                Rütbeni almak için sunucumuz üzerinden yetkililerle iletişime geçebilirsin.
+            </p>
+
+            <div class="purchase-price">
+                49,90 TL <span>/ ay</span>
+            </div>
+
+            <button class="btn btn-primary" onclick="copyIP()">
+                Sunucu Adresini Kopyala
+            </button>
+
+            <div class="note">
+                Satın alma ve ödeme işlemleri yetkili onayıyla manuel olarak gerçekleştirilir.
+            </div>
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    © 2026 HacsowMC. Tüm hakları saklıdır.
+</footer>
+
+<script>
+function toggleTheme() {
+    document.body.classList.toggle("light");
+
+    const light = document.body.classList.contains("light");
+
+    localStorage.setItem("hacsow-theme", light ? "light" : "dark");
+
+    document.querySelector(".theme").textContent = light ? "☾" : "☀";
+}
+
+const savedTheme = localStorage.getItem("hacsow-theme");
+
+if (savedTheme === "light") {
+    document.body.classList.add("light");
+    document.querySelector(".theme").textContent = "☾";
+}
+
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    clearTimeout(window.toastTimer);
+
+    window.toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2500);
+}
+
+async function copyIP() {
+    const ip = "hacsowmc.minecraft.how";
+
+    try {
+        await navigator.clipboard.writeText(ip);
+        showToast("Sunucu adresi kopyalandı!");
+    } catch (error) {
+        const input = document.createElement("textarea");
+        input.value = ip;
+        document.body.appendChild(input);
+        input.select();
+
+        try {
+            document.execCommand("copy");
+            showToast("Sunucu adresi kopyalandı!");
+        } catch (e) {
+            showToast("Sunucu adresimiz: " + ip);
+        }
+
+        input.remove();
+    }
+}
+</script>
+
+</body>
+</html>
