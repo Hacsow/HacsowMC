@@ -1,1 +1,172 @@
 
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101013">
+<title>HacsowMC | Satın Alma Talebi</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:Arial,sans-serif;
+  background:#101013;color:#f5f5f5;
+  min-height:100vh;
+}
+header{text-align:center;padding:65px 20px 35px}
+.logo{
+  width:min(340px,80vw);height:auto;
+  object-fit:contain;
+  filter:drop-shadow(0 0 25px #8e253855);
+}
+header h1{font-size:36px;margin-top:20px}
+header p{color:#aaa;margin-top:10px}
+.container{max-width:950px;margin:auto;padding:25px 20px 80px}
+h2{text-align:center;font-size:27px;margin-bottom:12px}
+.subtitle{text-align:center;color:#999;margin-bottom:30px}
+.ranks{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:17px;
+}
+.rank{
+  background:#19191e;border:1px solid #34343c;
+  border-radius:17px;padding:28px 15px;
+  text-align:center;cursor:pointer;
+  transition:.2s;
+}
+.rank:hover{transform:translateY(-5px);border-color:#a52c3c}
+.rank.selected{border:2px solid #bd3548;background:#24191d}
+.rank h3{font-size:25px;margin-bottom:12px}
+.rank p{color:#aaa;font-size:14px}
+.vip{color:#e64b5d}.mvip{color:#bd8aff}.hsvip{color:#e6bb55}
+form{
+  display:none;margin:45px auto 0;max-width:550px;
+  background:#19191e;border:1px solid #34343c;
+  border-radius:18px;padding:28px;
+}
+form.show{display:block;animation:appear .5s}
+@keyframes appear{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+form h2{margin-bottom:10px}
+.selected-name{text-align:center;color:#d85b6b;margin-bottom:25px}
+label{display:block;margin:18px 0 9px;color:#ddd}
+input{
+  width:100%;padding:15px;border-radius:9px;
+  border:1px solid #444;background:#101013;
+  color:white;font-size:16px;outline:none;
+}
+input:focus{border-color:#bd3548}
+button{
+  width:100%;padding:16px;margin-top:24px;
+  background:#a52c3c;color:white;border:0;
+  border-radius:9px;font-size:16px;font-weight:bold;
+  cursor:pointer;transition:.2s;
+}
+button:hover{background:#c13b4e}
+.note{text-align:center;color:#888;font-size:13px;margin-top:17px;line-height:1.6}
+footer{text-align:center;padding:25px;color:#666;font-size:13px}
+@media(max-width:650px){
+ .ranks{grid-template-columns:1fr}
+ header{padding-top:40px}
+ header h1{font-size:29px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <img src="logo.png" class="logo" alt="HacsowMC Logo">
+  <h1>Satın Alma Talebi</h1>
+  <p>HacsowMC mağazasına hoş geldin!</p>
+</header>
+
+<main class="container">
+  <h2>Hangisini almak istiyorsunuz?</h2>
+  <p class="subtitle">İstediğin rütbeyi seçerek devam et.</p>
+
+  <div class="ranks">
+    <div class="rank" onclick="chooseRank('VIP',this)">
+      <h3 class="vip">VIP</h3>
+      <p>49,90 TL / ay</p>
+    </div>
+    <div class="rank" onclick="chooseRank('MVIP',this)">
+      <h3 class="mvip">MVIP</h3>
+      <p>79,90 TL / ay</p>
+    </div>
+    <div class="rank" onclick="chooseRank('HSVIP',this)">
+      <h3 class="hsvip">HSVIP</h3>
+      <p>89,90 TL / ay</p>
+    </div>
+  </div>
+
+  <form id="requestForm"
+        action="https://formsubmit.co/hacsow37iletisim@gmail.com"
+        method="POST">
+
+    <input type="hidden" name="_subject" value="HacsowMC Yeni Rütbe Satın Alma Talebi">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_next" value="https://hacsow.github.io/HacsowMC/tesekkurler.html">
+
+    <h2>Talep Bilgileri</h2>
+    <p class="selected-name" id="selectedName"></p>
+
+    <input type="hidden" name="İstenen Rütbe" id="rankInput">
+
+    <label for="playerName">Minecraft Oyuncu Adın</label>
+    <input
+      type="text"
+      id="playerName"
+      name="Minecraft Oyuncu Adı"
+      placeholder="Örn: Hacsow37"
+      minlength="3"
+      maxlength="16"
+      pattern="[A-Za-z0-9_]+"
+      required
+    >
+
+    <button type="submit">Talep Gönder</button>
+    <p class="note">
+      Bu işlem ödeme yapmaz. Yalnızca satın alma talebini bize iletir.
+      Talebin ulaştığında seninle iletişime geçeceğiz.
+    </p>
+  </form>
+</main>
+
+<footer>© 2026 HacsowMC — Tüm hakları saklıdır.</footer>
+
+<script>
+function chooseRank(rank, element){
+  document.querySelectorAll('.rank').forEach(card=>{
+    card.classList.remove('selected');
+  });
+
+  element.classList.add('selected');
+
+  document.getElementById('rankInput').value=rank;
+  document.getElementById('selectedName').textContent=
+    'Seçilen rütbe: '+rank;
+
+  const form=document.getElementById('requestForm');
+  form.classList.add('show');
+
+  setTimeout(()=>{
+    form.scrollIntoView({behavior:'smooth',block:'center'});
+  },100);
+}
+
+const params=new URLSearchParams(window.location.search);
+const requestedRank=params.get('rank');
+if(requestedRank){
+  const rank=requestedRank.toUpperCase();
+  const cards=[...document.querySelectorAll('.rank')];
+  const matching=cards.find(card=>
+    card.querySelector('h3').textContent===rank
+  );
+  if(matching) chooseRank(rank,matching);
+}
+</script>
+
+</body>
+</html>
+
