@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HacsowMC | Resmî Sunucu</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#090909;color:white;font-family:Arial,sans-serif}
+header{padding:22px 8%;display:flex;justify-content:space-between;align-items:center;background:#111;border-bottom:2px solid #d71920}
+.logo{font-size:27px;font-weight:bold;color:#ed252c}
+nav a{color:white;text-decoration:none;margin-left:20px;font-size:14px}
+.hero{text-align:center;padding:110px 20px;background:linear-gradient(#0009,#000e),url('https://images.unsplash.com/photo-1607513746994-51f730a44832?auto=format&fit=crop&w=1600&q=80') center/cover}
+.hero h1{font-size:60px;color:#ed252c;margin-bottom:15px}
+.hero p{font-size:19px;color:#ddd;margin-bottom:28px}
+.btn{display:inline-block;background:#d71920;color:white;padding:14px 25px;border-radius:7px;text-decoration:none;font-weight:bold}
+section{padding:65px 8%;text-align:center}
+h2{font-size:32px;margin-bottom:25px;color:#ed252c}
+.cards{display:flex;justify-content:center;flex-wrap:wrap;gap:20px}
+.card{background:#171717;border:1px solid #333;padding:28px;border-radius:12px;width:260px}
+.card h3{margin-bottom:12px;color:#ed252c}
+.card p{color:#ccc;line-height:1.7}
+footer{background:#111;text-align:center;padding:25px;color:#888;border-top:1px solid #333}
+@media(max-width:650px){header{flex-direction:column;gap:18px}nav a{margin:0 7px}.hero h1{font-size:42px}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">HacsowMC</div>
+<nav>
+<a href="#anasayfa">Ana Sayfa</a>
+<a href="#hakkimizda">Hakkımızda</a>
+<a href="#katil">Sunucuya Katıl</a>
+<a href="#rutbeler">Rütbeler</a>
+</nav>
+</header>
+
+<div class="hero" id="anasayfa">
+<h1>HacsowMC</h1>
+<p>Macera burada başlıyor!</p>
+<a class="btn" href="#katil">Sunucuya Katıl</a>
+</div>
+
+<section id="hakkimizda">
+<h2>Hakkımızda</h2>
+<p>HacsowMC, arkadaşlarınla maceraya atılabileceğin Survival sunucusudur.</p>
+</section>
+
+<section id="katil">
+<h2>Sunucuya Katıl</h2>
+<div class="card">
+<h3>Java Edition</h3>
+<p>Sunucu adresimiz:</p>
+<p><strong>hacsowmc.minecraft.how</strong></p>
+<br>
+<button class="btn" onclick="navigator.clipboard.writeText('hacsowmc.minecraft.how')">IP Kopyala</button>
+</div>
+</section>
+
+<section id="rutbeler">
+<h2>Rütbeler</h2>
+<div class="cards">
+<div class="card"><h3>VIP</h3><p>49,90 TL</p><p>Aylık 100.000 oyun parası</p></div>
+<div class="card"><h3>MVIP</h3><p>79,90 TL</p><p>Aylık 200.000 oyun parası</p></div>
+<div class="card"><h3>HSVIP</h3><p>89,90 TL</p><p>Aylık 300.000 oyun parası</p></div>
+</div>
+</section>
+
+<footer>© 2026 HacsowMC - Tüm hakları saklıdır.</footer>
+</body>
+</html>
