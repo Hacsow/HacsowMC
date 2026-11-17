@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#111114">
+  <meta name="theme-color" content="#101013">
   <title>HacsowMC | Minecraft Sunucusu</title>
   <meta name="description" content="HacsowMC Minecraft sunucusuna katıl, arkadaşlarınla maceraya başla!">
 
@@ -41,7 +41,7 @@
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 90px;
+      scroll-padding-top: 100px;
     }
 
     body {
@@ -49,7 +49,8 @@
       color: var(--text);
       font-family: Arial, Helvetica, sans-serif;
       line-height: 1.6;
-      transition: background .25s, color .25s;
+      overflow-x: hidden;
+      transition: background .3s, color .3s;
     }
 
     a {
@@ -75,6 +76,7 @@
       background: color-mix(in srgb, var(--bg) 92%, transparent);
       backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
+      animation: headerDrop .7s ease both;
     }
 
     .navbar {
@@ -90,10 +92,21 @@
       font-weight: 900;
       letter-spacing: -.8px;
       white-space: nowrap;
+      transition: transform .3s;
+    }
+
+    .brand:hover {
+      transform: scale(1.05);
     }
 
     .brand span {
       color: var(--accent);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 25px;
     }
 
     nav {
@@ -106,17 +119,54 @@
       color: var(--muted);
       font-size: 14px;
       font-weight: 700;
+      position: relative;
       transition: color .2s;
     }
 
+    nav a::after {
+      content: "";
+      position: absolute;
+      bottom: -7px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width .25s ease;
+    }
+
     nav a:hover {
-      color: var(--accent);
+      color: var(--text);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* TEMA BUTONU */
+
+    .theme-button {
+      padding: 9px 13px;
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: .25s;
+    }
+
+    .theme-button:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 18px rgba(201,54,67,.15);
     }
 
     /* ANA SAYFA */
 
     .hero {
-      min-height: 610px;
+      min-height: 650px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -132,9 +182,10 @@
       position: absolute;
       inset: 0;
       z-index: -2;
-      background: url("logo.png") center center / 700px auto no-repeat;
+      background: url("logo.png") center center / 1400px auto no-repeat;
       opacity: .22;
       pointer-events: none;
+      animation: logoFloat 9s ease-in-out infinite;
     }
 
     .hero::after {
@@ -145,13 +196,14 @@
       background: radial-gradient(
         ellipse at center,
         transparent 0%,
-        var(--bg) 75%
+        var(--bg) 78%
       );
       pointer-events: none;
     }
 
     .hero-content {
       padding: 90px 20px;
+      animation: heroEnter 1s cubic-bezier(.2,.8,.2,1) both;
     }
 
     .hero-label {
@@ -165,6 +217,7 @@
       letter-spacing: 1.5px;
       margin-bottom: 22px;
       background: var(--surface);
+      animation: fadeUp .8s .15s both;
     }
 
     .hero h1 {
@@ -173,6 +226,7 @@
       letter-spacing: -4px;
       line-height: 1.05;
       margin-bottom: 20px;
+      animation: fadeUp .8s .3s both;
     }
 
     .hero h1 span {
@@ -184,6 +238,11 @@
       max-width: 540px;
       margin: 0 auto 32px;
       font-size: 17px;
+      animation: fadeUp .8s .45s both;
+    }
+
+    .hero-actions {
+      animation: fadeUp .8s .6s both;
     }
 
     .button {
@@ -197,12 +256,17 @@
       font-weight: 800;
       border: 1px solid var(--accent);
       cursor: pointer;
-      transition: .2s;
+      transition: transform .25s, background .25s, box-shadow .25s;
     }
 
     .button:hover {
       background: var(--accent-hover);
-      transform: translateY(-2px);
+      transform: translateY(-4px);
+      box-shadow: 0 9px 25px rgba(201,54,67,.25);
+    }
+
+    .button:active {
+      transform: translateY(-1px) scale(.98);
     }
 
     .button-outline {
@@ -214,6 +278,7 @@
 
     .button-outline:hover {
       background: var(--surface);
+      border-color: var(--accent);
     }
 
     /* GENEL BÖLÜMLER */
@@ -257,6 +322,12 @@
       border-radius: 14px;
       text-align: center;
       box-shadow: var(--shadow);
+      transition: transform .35s, border-color .35s;
+    }
+
+    .about-box:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
     }
 
     .about-box p {
@@ -279,13 +350,14 @@
       border-radius: 13px;
       padding: 30px 25px;
       text-align: center;
-      transition: transform .2s, border-color .2s, box-shadow .2s;
+      transition: transform .35s, border-color .35s, box-shadow .35s;
       box-shadow: var(--shadow);
     }
 
     .rank-card:hover {
-      transform: translateY(-6px);
+      transform: translateY(-9px);
       border-color: var(--accent);
+      box-shadow: 0 18px 40px rgba(201,54,67,.12);
     }
 
     .rank-icon {
@@ -299,6 +371,12 @@
       color: var(--accent);
       font-size: 25px;
       font-weight: 900;
+      transition: transform .35s, background .35s;
+    }
+
+    .rank-card:hover .rank-icon {
+      transform: rotate(-8deg) scale(1.1);
+      background: color-mix(in srgb, var(--accent) 12%, var(--surface-2));
     }
 
     .rank-card h3 {
@@ -332,7 +410,7 @@
       border: 1px solid var(--border);
       font-size: 14px;
       font-weight: 800;
-      transition: .2s;
+      transition: .25s;
     }
 
     .rank-card:hover .rank-link {
@@ -352,6 +430,12 @@
       border-radius: 14px;
       text-align: center;
       box-shadow: var(--shadow);
+      transition: transform .35s, border-color .35s;
+    }
+
+    .join-box:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
     }
 
     .server-ip {
@@ -365,12 +449,13 @@
       font-weight: 900;
       letter-spacing: .5px;
       cursor: pointer;
-      transition: .2s;
+      transition: .25s;
     }
 
     .server-ip:hover {
       border-color: var(--accent);
       color: var(--accent);
+      transform: scale(1.035);
     }
 
     .join-note {
@@ -416,51 +501,119 @@
       font-size: 13px;
     }
 
-    .theme-area {
-      margin-top: 18px;
+    /* SCROLL ANİMASYONLARI */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(35px);
+      transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1);
     }
 
-    .theme-button {
-      padding: 9px 16px;
-      background: var(--surface);
-      color: var(--text);
-      border: 1px solid var(--border);
-      border-radius: 7px;
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 700;
-      transition: .2s;
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    .theme-button:hover {
-      border-color: var(--accent);
+    .rank-card.reveal:nth-child(2) {
+      transition-delay: .12s;
+    }
+
+    .rank-card.reveal:nth-child(3) {
+      transition-delay: .24s;
+    }
+
+    /* ANİMASYONLAR */
+
+    @keyframes headerDrop {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes heroEnter {
+      from {
+        opacity: 0;
+        transform: translateY(25px) scale(.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(22px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes logoFloat {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.035);
+      }
     }
 
     /* TELEFON UYUMLULUĞU */
 
-    @media (max-width: 760px) {
+    @media (max-width: 850px) {
       .navbar {
-        flex-direction: column;
-        padding: 17px 0;
-        gap: 13px;
+        flex-wrap: wrap;
+        padding: 15px 0;
+      }
+
+      .nav-right {
+        width: 100%;
+        justify-content: space-between;
+        gap: 12px;
       }
 
       nav {
-        justify-content: center;
-        flex-wrap: wrap;
         gap: 17px;
+        flex-wrap: wrap;
       }
 
       nav a {
         font-size: 12px;
       }
 
+      .theme-button {
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .navbar {
+        justify-content: center;
+      }
+
+      .nav-right {
+        flex-direction: column;
+      }
+
+      nav {
+        justify-content: center;
+        gap: 15px;
+      }
+
       .hero {
-        min-height: 520px;
+        min-height: 540px;
       }
 
       .hero::before {
-        background-size: 90vw auto;
+        background-size: 180vw auto;
       }
 
       .hero h1 {
@@ -485,6 +638,22 @@
         margin: 10px 0 0;
       }
     }
+
+    /* HAREKETİ AZALTMA TERCİHİ */
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
   </style>
 </head>
 
@@ -494,42 +663,63 @@
 
   <header>
     <div class="container navbar">
-      <a href="#anasayfa" class="brand">Hacsow<span>MC</span></a>
 
-      <nav>
-        <a href="#anasayfa">Ana Sayfa</a>
-        <a href="#hakkimizda">Hakkımızda</a>
-        <a href="#rutbeler">Mağaza</a>
-        <a href="#katil">Sunucuya Katıl</a>
-      </nav>
+      <a href="#anasayfa" class="brand">
+        Hacsow<span>MC</span>
+      </a>
+
+      <div class="nav-right">
+        <nav>
+          <a href="#anasayfa">Ana Sayfa</a>
+          <a href="#hakkimizda">Hakkımızda</a>
+          <a href="#rutbeler">Mağaza</a>
+          <a href="#katil">Sunucuya Katıl</a>
+        </nav>
+
+        <button class="theme-button" id="themeButton" onclick="toggleTheme()">
+          ☀ Açık Tema
+        </button>
+      </div>
+
     </div>
   </header>
 
   <main>
 
+    <!-- ANA SAYFA -->
+
     <section class="hero" id="anasayfa">
       <div class="hero-content">
+
         <div class="hero-label">HACSOWMC MINECRAFT SUNUCUSU</div>
+
         <h1>Hacsow<span>MC</span></h1>
+
         <p>
           Maceraya hazır mısın? Arkadaşlarınla birlikte keşfet,
           geliş ve kendi hikâyeni yaz.
         </p>
 
-        <a href="#katil" class="button">Sunucuya Katıl</a>
-        <a href="#hakkimizda" class="button button-outline">Bizi Tanı</a>
+        <div class="hero-actions">
+          <a href="#katil" class="button">Sunucuya Katıl</a>
+          <a href="#hakkimizda" class="button button-outline">Bizi Tanı</a>
+        </div>
+
       </div>
     </section>
 
+    <!-- HAKKIMIZDA -->
+
     <section id="hakkimizda">
       <div class="container">
-        <div class="section-heading">
+
+        <div class="section-heading reveal">
           <small>Hakkımızda</small>
           <h2>Sunucumuz, Kalitemiz.</h2>
           <p>HacsowMC dünyasını birlikte keşfet.</p>
         </div>
 
-        <div class="about-box">
+        <div class="about-box reveal">
           <p>
             HacsowMC, oyuncuların birlikte eğlenebileceği,
             gelişebileceği ve yeni maceralara atılabileceği
@@ -537,12 +727,16 @@
             Seni de aramızda görmekten mutluluk duyarız!
           </p>
         </div>
+
       </div>
     </section>
 
+    <!-- MAĞAZA -->
+
     <section id="rutbeler">
       <div class="container">
-        <div class="section-heading">
+
+        <div class="section-heading reveal">
           <small>HacsowMC Mağaza</small>
           <h2>Rütbeni Yükselt</h2>
           <p>Sunucudaki macerana özel ayrıcalıklar kazan.</p>
@@ -550,7 +744,7 @@
 
         <div class="rank-grid">
 
-          <a href="vip.html" class="rank-card">
+          <a href="vip.html" class="rank-card reveal">
             <div class="rank-icon">V</div>
             <h3>VIP</h3>
             <p>Survival macerana VIP ayrıcalıklarıyla devam et.</p>
@@ -558,7 +752,7 @@
             <span class="rank-link">Rütbeyi İncele</span>
           </a>
 
-          <a href="mvip.html" class="rank-card">
+          <a href="mvip.html" class="rank-card reveal">
             <div class="rank-icon">M</div>
             <h3>MVIP</h3>
             <p>Daha fazla ayrıcalıkla oyun deneyimini geliştir.</p>
@@ -566,7 +760,7 @@
             <span class="rank-link">Rütbeyi İncele</span>
           </a>
 
-          <a href="hsvip.html" class="rank-card">
+          <a href="hsvip.html" class="rank-card reveal">
             <div class="rank-icon">H</div>
             <h3>HSVIP</h3>
             <p>En üst seviye rütbe ayrıcalıklarını keşfet.</p>
@@ -578,15 +772,18 @@
       </div>
     </section>
 
+    <!-- SUNUCUYA KATIL -->
+
     <section id="katil">
       <div class="container">
-        <div class="section-heading">
+
+        <div class="section-heading reveal">
           <small>Aramıza Katıl</small>
           <h2>Macera Seni Bekliyor!</h2>
           <p>Sunucu adresimizi kopyala ve hemen katıl.</p>
         </div>
 
-        <div class="join-box">
+        <div class="join-box reveal">
           <h3>HacsowMC Sunucu Adresi</h3>
 
           <div class="server-ip" onclick="copyIP()">
@@ -597,6 +794,7 @@
             Adrese tıklayarak sunucu IP'sini kopyalayabilirsin.
           </p>
         </div>
+
       </div>
     </section>
 
@@ -605,17 +803,12 @@
   <footer>
     <div class="container">
       <p>© 2026 HacsowMC. Tüm hakları saklıdır.</p>
-
-      <div class="theme-area">
-        <button class="theme-button" id="themeButton" onclick="toggleTheme()">
-          ☀ Açık Temaya Geç
-        </button>
-      </div>
     </div>
   </footer>
 
   <script>
-    // Sunucu IP'sini kopyalama
+    // SUNUCU IP'SİNİ KOPYALAMA
+
     function copyIP() {
       const ip = "hacsowmc.minecraft.how";
 
@@ -626,11 +819,13 @@
       });
     }
 
-    // Bildirim animasyonu
+    // BİLDİRİM ANİMASYONU
+
     let toastTimer;
 
     function showToast(message) {
       const toast = document.getElementById("toast");
+
       toast.textContent = message;
       toast.classList.add("show");
 
@@ -641,15 +836,16 @@
       }, 2400);
     }
 
-    // Tema seçimi
+    // TEMA SİSTEMİ
+
     function applyTheme(theme) {
       document.body.classList.toggle("light", theme === "light");
 
       const button = document.getElementById("themeButton");
 
       button.textContent = theme === "light"
-        ? "☾ Koyu Temaya Geç"
-        : "☀ Açık Temaya Geç";
+        ? "☾ Koyu Tema"
+        : "☀ Açık Tema";
     }
 
     function toggleTheme() {
@@ -660,9 +856,42 @@
       applyTheme(nextTheme);
     }
 
-    // Kayıtlı temayı yükle
     const savedTheme = localStorage.getItem("hacsow-theme") || "dark";
     applyTheme(savedTheme);
+
+    // SAYFA KAYDIRMA ANİMASYONU
+
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener("click", function(event) {
+        const target = document.querySelector(this.getAttribute("href"));
+
+        if (target) {
+          event.preventDefault();
+
+          target.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+        }
+      });
+    });
+
+    // SCROLL İLE BÖLÜMLERİN GÖRÜNMESİ
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12
+    });
+
+    document.querySelectorAll(".reveal").forEach(element => {
+      observer.observe(element);
+    });
   </script>
 
 </body>
